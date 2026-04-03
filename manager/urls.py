@@ -6,5 +6,8 @@ from manager import views
 app_name = "manager"
 
 urlpatterns = [
-    path("", views.TaskListView.as_view(), name="task_list"),
+    # Task
+    path("", views.TaskListView.as_view(), name="task-list"),
+    # Tag
+    path("tags", views.TagListView.as_view(), name="tag-list"),
 ]
