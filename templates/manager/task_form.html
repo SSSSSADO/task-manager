@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <title>
+    {% if task %}
+      Task Update
+    {% else %}
+      Task Create
+    {% endif %}
+  </title>
+{% endblock %}
+
+{% block content %}
+  {% if task %}
+    <h1>{{ task.content }} Update</h1>
+  {% else %}
+    <h1>Task Create</h1>
+  {% endif %}
+
+  <form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit">
+  </form>
+{% endblock %}
