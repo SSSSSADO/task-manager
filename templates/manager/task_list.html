@@ -5,6 +5,12 @@
 {% endblock %}
 
 {% block content %}
+  <h1>
+    TODO list
+    <a style="float:right" href="#">Add task</a>
+  </h1>
+  <hr>
+
   {% if task_list %}
     <ul>
       {% for task in task_list %}
@@ -12,14 +18,29 @@
           {{ task.content }} -
           {% if task.completed %}
             Done
+            <a style="float:right" href="#">Undo</a>
           {% else %}
             Not Done
+            <a style="float:right" href="#">Done</a>
           {% endif %}
-          <hr>
+          <br>
+
           created: {{ task.datetime }} -
           {% if task.deadline %}
             Deadline: {{ task.deadline }}
           {% endif %}
+          <br>
+          <p>
+            Tags:
+            {% for tag in task.tags.all %}
+              {{ tag.name }}
+            {% empty %}
+              No tags
+            {% endfor %}
+            <a href="#">Update</a>
+            <a href="#">Delete</a>
+          </p>
+          <hr>
         </li>
       {% endfor %}
     </ul>
