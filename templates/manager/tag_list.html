@@ -7,7 +7,9 @@
 {% block content %}
   <h1>
     Tags
-    <a style="float:right" href="#">Add</a>
+    <a style="float:right" href="{% url 'manager:tag-create' %}">
+      Add
+    </a>
   </h1>
 
   <table border="1" cellpadding="10" cellspacing="0">
@@ -22,11 +24,15 @@
         <td>{{ tag.name }}</td>
 
         <td>
-          <a href="#">Update</a>
+          <a href="{% url 'manager:tag-update' pk=tag.id %}">
+            Update
+          </a>
         </td>
 
         <td>
-          <a href="#">Delete</a>
+          <a href="{% url 'manager:tag-delete' pk=tag.id %}">
+            Delete
+          </a>
         </td>
       </tr>
     {% empty %}

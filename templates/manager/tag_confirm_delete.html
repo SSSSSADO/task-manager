@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <title>Tag Delete</title>
+{% endblock %}
+
+{% block content %}
+  <h1>{{ tag.name }} Delete ?</h1>
+  <p>Are you sure want to delete this tag ?</p>
+  <form action="" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Delete">
+  </form>
+  <h2><a href="{% url 'manager:tag-list' %}">Cancel</a></h2>
+{% endblock %}

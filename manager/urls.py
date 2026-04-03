@@ -2,7 +2,6 @@ from django.urls import path
 
 from manager import views
 
-
 app_name = "manager"
 
 urlpatterns = [
@@ -19,6 +18,18 @@ urlpatterns = [
         views.TaskDeleteView.as_view(),
         name="task-delete"
     ),
+    path("task/<int:pk>/toggle/", views.toggle_task, name="task-toggle"),
     # Tag
-    path("tags", views.TagListView.as_view(), name="tag-list"),
+    path("tags/", views.TagListView.as_view(), name="tag-list"),
+    path("tags/create/", views.TagCreateView.as_view(), name="tag-create"),
+    path(
+        "tags/<int:pk>/update/",
+        views.TagUpdateView.as_view(),
+        name="tag-update"
+    ),
+    path(
+        "tags/<int:pk>/delete",
+        views.TagDeleteView.as_view(),
+        name="tag-delete"
+    )
 ]

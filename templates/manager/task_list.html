@@ -17,19 +17,23 @@
     <ul>
       {% for task in task_list %}
         <li>
-          {{ task.content }} -
+          <span style="font-weight: bold;">{{ task.content }} -</span>
           {% if task.completed %}
-            Done
-            <a style="float:right" href="#">Undo</a>
+            <span style="font-weight: bold;color:green;">Done</span>
+            <a style="font-weight: bold;float:right;" href="{% url 'manager:task-toggle' task.id %}">
+              <span style="color:grey;">Undo</span>
+            </a>
           {% else %}
-            Not Done
-            <a style="float:right" href="#">Done</a>
+            <span style="font-weight: bold;color:red;">Not Done</span>
+            <a style="font-weight: bold;float:right;" href="{% url 'manager:task-toggle' task.id %}">
+              <span style="color:green;">Done</span>
+            </a>
           {% endif %}
           <br>
 
           created: {{ task.datetime }} -
           {% if task.deadline %}
-            Deadline: {{ task.deadline }}
+            <span style="color:darkred;">Deadline: {{ task.deadline }}</span>
           {% endif %}
           <br>
           <p>
