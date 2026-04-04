@@ -7,12 +7,13 @@ from manager.models import Tag, Task
 
 
 # Task
-def toggle_task(request, pk):
-    task = get_object_or_404(Task, pk=pk)
-    task.completed = not task.completed
-    task.save()
+class ToggleTaskView(generic.View):
+    def post(self, request, pk):
+        task = get_object_or_404(Task, pk=pk)
+        task.completed = not task.completed
+        task.save()
 
-    return redirect("manager:task-list")
+        return redirect("manager:task-list")
 
 
 class TaskListView(generic.ListView):

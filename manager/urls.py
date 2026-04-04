@@ -18,7 +18,11 @@ urlpatterns = [
         views.TaskDeleteView.as_view(),
         name="task-delete"
     ),
-    path("task/<int:pk>/toggle/", views.toggle_task, name="task-toggle"),
+    path(
+        "task/<int:pk>/toggle/",
+        views.ToggleTaskView.as_view(),
+        name="task-toggle"
+    ),
     # Tag
     path("tags/", views.TagListView.as_view(), name="tag-list"),
     path("tags/create/", views.TagCreateView.as_view(), name="tag-create"),
