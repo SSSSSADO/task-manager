@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <title>Todo list</title>
+{% endblock %}
+
+{% block content %}
+  <h1>
+    TODO list
+    <a style="float:right" href="{% url 'manager:task-create' %}">
+      Add task
+    </a>
+  </h1>
+  <hr>
+
+  {% if task_list %}
+    <ul>
+      {% for task in task_list %}
+        <li>
+          <span style="font-weight: bold;">{{ task.content }} -</span>
+          {% if task.completed %}
+            <span style="font-weight: bold;color:green;">Done</span>
+            <form action="{% url 'manager:task-toggle' task.id %}" method="post" style="float:right;">
+              {% csrf_token %}
+              <button type="submit" style="background:none;border:none;cursor:pointer;">
+                <span style="color:grey;">Undo</span>
+              </button>
+            </form>
+          {% else %}
+            <span style="font-weight: bold;color:red;">Not Done</span>
+            <form action="{% url 'manager:task-toggle' task.id %}" method="post" style="float:right;">
+              {% csrf_token %}
+              <button type="submit" style="background:none;border:none;cursor:pointer;">
+                <span style="color:green;">Done</span>
+              </button>
+            </form>
+          {% endif %}
+          <br>
+          created: {{ task.datetime }} -
+          {% if task.deadline %}
+            <span style="color:darkred;">Deadline: {{ task.deadline }}</span>
+          {% endif %}
+          <br>
+          <p>
+            Tags:
+            {% for tag in task.tags.all %}
+              {{ tag.name }}
+            {% empty %}
+              No tags
+            {% endfor %}
+            <a href="{% url 'manager:task-update' pk=task.id %}">
+              Update
+            </a>
+            <a href="{% url 'manager:task-delete' pk=task.id %}">
+              Delete
+            </a>
+          </p>
+          <hr>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    No tasks found.
+  {% endif %}
+{% endblock %}
